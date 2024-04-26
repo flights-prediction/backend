@@ -1,7 +1,10 @@
 package com.backend.aiplane.global.oauth;
 
+import lombok.AllArgsConstructor;
+
 import java.util.Map;
 
+@AllArgsConstructor
 public class KakaoUserInfo implements OAuth2UserInfo {
 
     private Map<String, Object> attributes;

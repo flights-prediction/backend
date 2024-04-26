@@ -15,8 +15,8 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class JwtUtil {
-    @Value("${jwt.secret}")
-    private String SECRET_KEY;
+    @Value("${JWT.SECRET}")
+    private String SECRET_KEY = "";
 
     private SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(this.SECRET_KEY);

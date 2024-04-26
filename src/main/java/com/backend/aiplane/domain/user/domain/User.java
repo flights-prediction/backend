@@ -2,7 +2,10 @@ package com.backend.aiplane.domain.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,8 +22,8 @@ public class User {
     @Column(name = "users_uuid", columnDefinition = "BINARY(16)", unique = true)
     private UUID userId;
 
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "provider", nullable = false, length = 50)
     private String provider;
@@ -29,4 +32,11 @@ public class User {
     @Column(name = "provider_id", nullable = false, length = 50)
     private String providerId;
 
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, length = 20)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", length = 20)
+    private LocalDateTime updatedAt;
 }

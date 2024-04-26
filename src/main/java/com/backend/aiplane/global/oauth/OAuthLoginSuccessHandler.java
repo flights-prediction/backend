@@ -1,5 +1,9 @@
 package com.backend.aiplane.global.oauth;
 
+import com.backend.aiplane.domain.token.domain.RefreshToken;
+import com.backend.aiplane.domain.token.domain.RefreshTokenRepository;
+import com.backend.aiplane.domain.user.domain.User;
+import com.backend.aiplane.domain.user.domain.UserRepository;
 import com.backend.aiplane.global.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -30,6 +33,7 @@ public class OAuthLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     @Value("${jwt.refresh-token.expiration-time}")
     private long REFRESH_TOKEN_EXPIRATION_TIME; // 리프레쉬 토큰 유효기간
 
+
     private OAuth2UserInfo oAuth2UserInfo = null;
 
     private final JwtUtil jwtUtil;
@@ -43,18 +47,11 @@ public class OAuthLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 
         // 구글 || 카카오 || 네이버 로그인 요청
         switch (provider) {
-            case "google" -> {
-                log.info("구글 로그인 요청");
-                oAuth2UserInfo = new GoogleUserInfo(token.getPrincipal().getAttributes());
-            }
             case "kakao" -> {
                 log.info("카카오 로그인 요청");
                 oAuth2UserInfo = new KakaoUserInfo(token.getPrincipal().getAttributes());
             }
-            case "naver" -> {
-                log.info("네이버 로그인 요청");
-                oAuth2UserInfo = new NaverUserInfo((Map<String, Object>) token.getPrincipal().getAttributes().get("response"));
-            }
+
         }
 
         // 정보 추출

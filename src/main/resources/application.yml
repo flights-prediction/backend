@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: localhost
-    username: root
-    password: devwlsdn1942!#
+    url: ${DB_URL}
+    username: admin
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -26,8 +26,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: 5a3ad59601816468b8c57af58b644900 # Rest API?
-            client-secret: 0ATBlYfjgYjN8Ds9dBIOaTZsbb6XHWpP
+            client-id: ${KAKAO_CLIENT_ID} # Rest API?
+            client-secret: ${KAKAO_CLIENT_SECRET}
             scope:
               - profile_nickname
             authorization-grant-type: authorization_code
@@ -42,11 +42,10 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 
-    jwt:
-      secret: airseekersixtimesairseekersixtimesairseekersixtimesairseekersixtimesairseekersixtimesairseekersixtimes
-      redirect: http://localhost:8080/login?name=%s&access_token=%s&refresh_token=%s
-
-      access-token:
-        expiration-time: 3600000
-      refresh-token:
-        expiration-time: 604800000
+jwt:
+  secret: ${JWT_SECRET}
+  redirect: ${JWT_REDIRECT_URI}
+  access-token:
+    expiration-time: ${ACCESS_TOKEN_EXPIRATION_TIME}
+  refresh-token:
+    expiration-time: ${REFRESH_TOKEN_EXPIRATION_TIME}
