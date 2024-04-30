@@ -16,7 +16,7 @@ public class HealthTestController {
     @GetMapping("")
     public String apiHealthTest() {
 
-        return "airseeker v2 : 소셜로그인";
+        return "airseeker v3 : 소셜로그인 + jenkins";
     }
 
 }
