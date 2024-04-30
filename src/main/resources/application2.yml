@@ -1,0 +1,51 @@
+#spring:
+#  datasource:
+#    url: jdbc:mysql://airline-db.cnuqkmsoqbpf.ap-northeast-2.rds.amazonaws.com:3306/airline?characterEncoding\=utf8
+#    username: admin
+#    password: airlineadminpw
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#    hibernate:
+#      ddl-auto: update
+#
+#    defer-datasource-initialization: true
+#    open-in-view: false
+#    generate-ddl: true
+#    show-sql: true
+#
+#  sql:
+#    init:
+#      mode: always
+#
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          kakao:
+#            client-id: 5a3ad59601816468b8c57af58b644900            # Rest API?
+#            client-secret: 0ATBlYfjgYjN8Ds9dBIOaTZsbb6XHWpP
+#            scope:
+#              - profile_nickname
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#            client-name: Kakao
+#            client-authentication-method: client_secret_post
+#
+#        provider:
+#          kakao:
+#            authorization-uri: https://kauth.kakao.com/oauth/authorize
+#            token-uri: https://kauth.kakao.com/oauth/token
+#            user-info-uri: https://kapi.kakao.com/v2/user/me
+#            user-name-attribute: id
+#
+#jwt:
+#  secret: airseekersixtimesairseekersixtimesairseekersixtimesairseekersixtimesairseekersixtimesairseekersixtimes
+#  redirect: http://localhost:5173/login?name\=%s&access_token\=%s&refresh_token\=%s
+#  access-token:
+#    expiration-time: 3600000
+#  refresh-token:
+#    expiration-time: 604800000
