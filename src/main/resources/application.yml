@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ai-plane
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  profiles:
+    include: jwt, db
