@@ -1,8 +1,10 @@
 package com.backend.aiplane.domain.flightInfo.domain;
 
+import com.backend.aiplane.domain.route.domain.Route;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class FlightInfo {
@@ -11,13 +13,15 @@ public class FlightInfo {
     @Column(name = "flight_info_id")
     private Long id;
 
-    private String departureDate;
+    private LocalDate departureDate;
 
-    private String departureTime;
+    private LocalDateTime departureTime;
 
-    private String arriveTime;
+    private LocalDateTime arriveTime;
 
-    private Long routeId;
+    @ManyToOne
+    @JoinColumn(name="route_id")
+    private Route route;
 
     private String airline;
 }

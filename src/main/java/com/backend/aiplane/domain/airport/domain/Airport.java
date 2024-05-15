@@ -12,6 +12,7 @@ public class Airport {
 
     private String name;
 
+    @Column(unique = true)
     private String code;
 
     @ManyToOne
