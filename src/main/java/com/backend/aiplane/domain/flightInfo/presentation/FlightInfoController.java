@@ -12,12 +12,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -30,8 +29,10 @@ public class FlightInfoController {
 
     @Operation(description = "항공권 정보 조회를 위한 REST API.")
     @GetMapping()
-    public ResponseEntity<SuccessResponse<FlightInfoSearchResponses>> getMyselfUserInfoByAccessToken(@RequestBody
-                                                                                                         FlightInfoSearchRequest flightInfoSearchRequest) {
+    public ResponseEntity<SuccessResponse<FlightInfoSearchResponses>> getFlightInfos(
+            @ModelAttribute FlightInfoSearchRequest flightInfoSearchRequest
+
+    ) {
         FlightInfoSearchDto dto = new FlightInfoSearchDto(flightInfoSearchRequest);
         List<FlightInfo> flightInfos = flightInfoService.searchFlightInfo(dto);
         List<FlightInfoSearchResponse> flightInfoSearchResponses = convertToResponse(flightInfos);

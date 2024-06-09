@@ -20,8 +20,7 @@ public class FlightInfo {
 
     private LocalTime departureTime;
 
-    private LocalDateTime arriveDateTime;
-    private Integer price;
+    private LocalTime arriveTime;
 
     @ManyToOne
     @JoinColumn(name="route_id")

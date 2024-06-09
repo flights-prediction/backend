@@ -10,8 +10,7 @@ public record FlightInfoSearchResponse(
         Long flightInfoId,
         LocalDate departureDate,
         LocalTime departureTime,
-        LocalDateTime arriveDateTime,
-        Integer price,
+        LocalTime arriveTime,
 
         Route route,
         String airline
@@ -20,8 +19,7 @@ public record FlightInfoSearchResponse(
         this(flightInfo.getId(),
                 flightInfo.getDepartureDate(),
                 flightInfo.getDepartureTime(),
-                flightInfo.getArriveDateTime(),
-                flightInfo.getPrice(),
+                flightInfo.getArriveTime(),
                 flightInfo.getRoute(),
                 flightInfo.getAirline());
     }

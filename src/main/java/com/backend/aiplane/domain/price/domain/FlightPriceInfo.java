@@ -3,7 +3,7 @@ package com.backend.aiplane.domain.price.domain;
 import com.backend.aiplane.domain.flightInfo.domain.FlightInfo;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class FlightPriceInfo {
@@ -12,9 +12,9 @@ public class FlightPriceInfo {
     @Column(name = "flight_price_info_id")
     private Long id;
 
-    private LocalDateTime search_date;
+    private LocalDate search_date;
 
-    private Integer predictedPrice;
+    private Long predictedPrice;
 
 
     @ManyToOne
