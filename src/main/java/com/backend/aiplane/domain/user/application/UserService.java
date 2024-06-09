@@ -23,17 +23,30 @@ public class UserService {
 
     public UserResponse getMyselfInfoByAccessToken(String authorizationHeader) {
         String accessToken = jwtUtil.getTokenFromHeader(authorizationHeader);
-        String userId = jwtUtil.getUserIdFromToken(accessToken);
+        String userUUID = jwtUtil.getUserIdFromToken(accessToken);
         boolean tokenExpired = jwtUtil.isTokenExpired(accessToken);
         log.info("get userself info token expired :" + tokenExpired);
-        log.info("userId or UUID : " + userId);
+        log.info("userId or UUID : " + userUUID);
 
-        User findUser = userRepository.findByUserId(UUID.fromString(userId))
-                .orElseThrow(() -> new IllegalArgumentException("no uuid"));
+        User findUser = getUserByUserUUID(userUUID);
 
         return UserResponse.builder()
                 .name(findUser.getName())
                 .build();
+    }
+
+    public User getUserByUserId(Long userId){
+        User findUser = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("No User. user Id :" + userId));
+
+        return findUser;
+    }
+
+    public User getUserByUserUUID(String userUUID){
+        User findUser = userRepository.findByUserId(UUID.fromString(userUUID))
+                .orElseThrow(() -> new IllegalArgumentException("No User. user UUID :" + userUUID));
+
+        return findUser;
     }
 
 }

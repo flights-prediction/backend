@@ -2,8 +2,10 @@ package com.backend.aiplane.domain.route.domain;
 
 import com.backend.aiplane.domain.airport.domain.Airport;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,5 +18,5 @@ public class Route {
 
     @ManyToOne
     @JoinColumn(name = "arrive_airport_id")
-    private Airport arriveAirportId;
+    private Airport arriveAirport;
 }

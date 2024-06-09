@@ -2,11 +2,14 @@ package com.backend.aiplane.domain.flightInfo.domain;
 
 import com.backend.aiplane.domain.route.domain.Route;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
+@Getter
 public class FlightInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +18,10 @@ public class FlightInfo {
 
     private LocalDate departureDate;
 
-    private LocalDateTime departureTime;
+    private LocalTime departureTime;
 
-    private LocalDateTime arriveTime;
+    private LocalDateTime arriveDateTime;
+    private Integer price;
 
     @ManyToOne
     @JoinColumn(name="route_id")
