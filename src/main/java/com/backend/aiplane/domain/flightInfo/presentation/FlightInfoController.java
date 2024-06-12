@@ -6,6 +6,7 @@ import com.backend.aiplane.domain.flightInfo.domain.FlightInfo;
 import com.backend.aiplane.domain.flightInfo.presentation.dto.request.FlightInfoSearchRequest;
 import com.backend.aiplane.domain.flightInfo.presentation.dto.response.FlightInfoSearchResponse;
 import com.backend.aiplane.domain.flightInfo.presentation.dto.response.FlightInfoSearchResponses;
+import com.backend.aiplane.domain.like.application.LikeService;
 import com.backend.aiplane.domain.user.application.dto.UserResponse;
 import com.backend.aiplane.global.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/flightInfos")
 public class FlightInfoController {
     private final FlightInfoService flightInfoService;
+    private final LikeService likeService;
     private final ModelMapper modelMapper;
 
     @Operation(description = "항공권 정보 조회를 위한 REST API.")
@@ -35,6 +37,17 @@ public class FlightInfoController {
     ) {
         FlightInfoSearchDto dto = new FlightInfoSearchDto(flightInfoSearchRequest);
         List<FlightInfo> flightInfos = flightInfoService.searchFlightInfo(dto);
+        List<FlightInfoSearchResponse> flightInfoSearchResponses = convertToResponse(flightInfos);
+        return SuccessResponse.of(new FlightInfoSearchResponses(flightInfoSearchResponses));
+    }
+
+    @Operation(description = "유저가 찜한 항공권 정보를 조회하는 REST API.")
+    @GetMapping("/user/{userId}/like")
+    public ResponseEntity<SuccessResponse<FlightInfoSearchResponses>> getFlightInfosOfUserLikes(
+            @PathVariable Long userId
+
+    ) {
+        List<FlightInfo> flightInfos = likeService.searchUserLikeFlightInfo(userId);
         List<FlightInfoSearchResponse> flightInfoSearchResponses = convertToResponse(flightInfos);
         return SuccessResponse.of(new FlightInfoSearchResponses(flightInfoSearchResponses));
     }

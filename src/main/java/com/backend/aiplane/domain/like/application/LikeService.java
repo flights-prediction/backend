@@ -8,8 +8,11 @@ import com.backend.aiplane.domain.like.domain.LikeRepository;
 import com.backend.aiplane.domain.user.application.UserService;
 import com.backend.aiplane.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,6 +56,21 @@ public class LikeService {
 
         return like;
     }
+
+    @Transactional
+    public List<FlightInfo> searchUserLikeFlightInfo(Long userId){
+        List<Like> userLikes = getLikesByUserId(userId);
+
+        List userLikeFlightInfo = new ArrayList<FlightInfo>();
+
+        for (Like like : userLikes) {
+            Hibernate.initialize(like.getFlightInfo());
+            userLikeFlightInfo.add(like.getFlightInfo());
+        }
+
+        return userLikeFlightInfo;
+    }
+
 
     public List<Like> getLikesByUserId(Long userId){
         List<Like> userLikes = likeRepository.findAllByUserId(userId);
