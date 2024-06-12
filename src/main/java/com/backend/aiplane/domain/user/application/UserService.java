@@ -32,6 +32,7 @@ public class UserService {
 
         return UserResponse.builder()
                 .name(findUser.getName())
+                .userId(findUser.getId())
                 .build();
     }
 
