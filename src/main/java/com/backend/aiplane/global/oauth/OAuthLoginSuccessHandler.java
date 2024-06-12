@@ -79,6 +79,9 @@ public class OAuthLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
             user = existUser;
         }
 
+        Long userId = user.getId();
+
+        log.info("유저 id : {}", userId);
         log.info("유저 이름 : {}", name);
         log.info("PROVIDER : {}", provider);
         log.info("PROVIDER_ID : {}", providerId);
@@ -97,7 +100,7 @@ public class OAuthLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 
         // 이름, 액세스 토큰, 리프레쉬 토큰을 담아 리다이렉트
         String encodedName = URLEncoder.encode(name, "UTF-8");
-        String redirectUri = String.format(REDIRECT_URI, encodedName, accessToken, refreshToken);
+        String redirectUri = String.format(REDIRECT_URI, userId, encodedName, accessToken, refreshToken);
         getRedirectStrategy().sendRedirect(request, response, redirectUri);
     }
 }
